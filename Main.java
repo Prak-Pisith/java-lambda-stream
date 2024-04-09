@@ -8,6 +8,7 @@ class Main {
         TestLambda testLambda = new TestLambda();
         testLambda.allColor();
 
+
         TestStream testStream = new TestStream();
         testStream.stream1();
         testStream.stream2();
