@@ -11,6 +11,7 @@ class Main {
         TestStream testStream = new TestStream();
         testStream.stream1();
         testStream.stream2();
+        testStream.stream3();
     }
 }
 
@@ -25,8 +26,10 @@ class TestLambda {
 
 class TestStream {
 
+    List<String> strings = List.of("I", "am", "a", "list", "of", "Strings");
+
+
     public void stream1() {
-        List<String> strings = List.of("I", "am", "a", "list", "of", "Strings");
         Stream<String> stream = strings.stream();
         System.out.println("stream");
         System.out.println(stream);
@@ -41,12 +44,37 @@ class TestStream {
     }
 
     public void stream2() {
-        List<String> strings = List.of("I", "am", "a", "list", "of", "Strings");
         Stream<String> stream = strings.stream();
         Stream<String> limit = stream.limit(4);
         List<String> limitResult = limit.collect(Collectors.toList());
         System.out.println(limitResult);
     }
 
-    
+    public void stream3() {
+        // Stream Pipeline
+        List<String> result = strings
+                .stream() // Source
+                .limit(5) // Intermediate operation
+                .collect(Collectors.toList()); // terminal operation
+                // then output
+        System.out.println("Result : " + result);
+
+        List<String> result2 = strings
+                .stream()
+                .sorted((s1, s2) -> s1.compareToIgnoreCase(s2))
+                .limit(5)
+                .collect(Collectors.toList());
+        System.out.println("Result 2 : " + result2);
+
+        List<String> result3 = strings
+                .stream()
+                .sorted((s1, s2) -> s1.compareToIgnoreCase(s2))
+                .skip(2)
+                .limit(4)
+                .collect(Collectors.toList());
+        System.out.println("Result 3 : " + result3);
+
+    }
+
+
 }
