@@ -18,6 +18,9 @@ class Main {
         Demo demo = new Demo();
         demo.findAllRockSongs();
         demo.listAllGenres();
+        demo.checkIfGenreExist();
+        demo.search("justin");
+        demo.search("The Beatles");
     }
 }
 
@@ -122,6 +125,26 @@ class Demo {
         System.out.println(genreList);
         System.out.println("Total: " + genreList.size());
 
+    }
+
+    public void checkIfGenreExist() {
+        boolean result = songList
+                .stream()
+                .anyMatch(s -> s.getGenre().equals("R&B"));
+        System.out.println("Is Genre R&B exist: " + result);
+    }
+
+    public void search (String artist) {
+        Optional<Song> result = songList
+                .stream()
+                .filter(song -> song.getArtist().equals(artist))
+                .findFirst();
+        System.out.println("Search Result");
+        if (result.isPresent()) {
+            System.out.println(result);
+        } else {
+            System.out.println("No song found by: " + artist);
+        }
     }
 
 }
